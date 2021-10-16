@@ -1,0 +1,41 @@
+<div class="jumbotron py-3">
+<h1 class="display-4 text-center">User Details</h1>
+</div>
+<form  [formGroup]="userForm" autocomplete="off" (submit)="onSubmit(userForm)">
+        <!--#form="ngForm">-->
+  <input type="hidden" name="userId"
+   [value]="service.formData.userId"/>
+ <div class="col-md-6 offset-md-1">
+   <div class="form-group">
+    <label >USER NAME</label>
+    <input type="text" class="form-control form-control-lg" placeholder="User Name" name="userName" formControlName="userName"/>
+    <label *ngIf="userForm.get('userName')?.invalid && (userForm.get('userName')?.dirty || userForm.get('userName')?.touched)"
+           class = "'error'"> Name is required with 12 max character. </label>
+<!--    #userName="ngModel" [(ngModel)]="service.formData.userName" required/>-->
+  </div>
+  <div class="form-group">
+    <label >CITY</label>
+    <input type="text" class="form-control form-control-lg" placeholder="city" name="city" formControlName="city"/>
+    <label *ngIf="userForm.get('city')?.invalid && (userForm.get('city')?.dirty || userForm.get('city')?.touched)"
+           class = "'error'"> City is required.  </label>
+           <!--#city="ngModel" [(ngModel)]="service.formData.city"/>-->
+  </div>
+  <div class="form-group">
+    <label >Date of joining</label>
+    <input type="date" class="form-control form-control-lg" placeholder="Date of joining" name="dateOfJoining" formControlName="DateOfJoining"/>
+    <label *ngIf="userForm.get('DateOfJoining')?.invalid && (userForm.get('DateOfJoining')?.dirty || userForm.get('DateOfJoining')?.touched)"
+           class = "'error'"> dateOfJoining is required. </label>
+
+    <!--#dateOfJoining="ngModel" [(ngModel)]="service.formData.dateOfJoining"/>-->
+  </div>
+ </div>
+  <div class="offset-md-6 p-2 w-50 bd-highlight ">
+    <img width="250px" height="250px"
+         [src]="PhotoFilePath"
+         alt="profile pic"  />
+    <input class="m-2" type="file" (change)="uploadPhoto($event)"  />
+  </div>
+  <div class="form-group offset-md-1">
+    <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="userForm.invalid">Submit</button>
+  </div>
+</form>
